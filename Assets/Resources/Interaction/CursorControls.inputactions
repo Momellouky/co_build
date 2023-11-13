@@ -1,0 +1,54 @@
+{
+    "name": "CursorControls",
+    "maps": [
+        {
+            "name": "Cursor",
+            "id": "84db1f10-c08a-4db8-851b-5095b4203312",
+            "actions": [
+                {
+                    "name": "Select",
+                    "type": "Button",
+                    "id": "475a490f-b4ac-4794-8e04-c566410075e7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Activate",
+                    "type": "Button",
+                    "id": "33fedd52-a640-4972-9a61-d174d5b0a1ae",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d54361b5-ee3b-4c8e-bea9-59ce10a41b03",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a3ed22b8-5c01-4f7b-a681-cdc06712695d",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Activate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
