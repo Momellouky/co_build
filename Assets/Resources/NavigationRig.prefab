@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7655433663912256023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2663777352090040658}
+  - component: {fileID: 5464845010683634790}
+  - component: {fileID: 4718797810583754426}
+  - component: {fileID: 6306604242514224652}
+  m_Layer: 0
+  m_Name: NavigationRig
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2663777352090040658
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7655433663912256023}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4598724038121248026}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5464845010683634790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7655433663912256023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
+--- !u!114 &4718797810583754426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7655433663912256023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 5464845010683634790}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &6306604242514224652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7655433663912256023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35d932a9e02d4fcb78b5ad8983b4eae2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraPositionOffset: {x: 0, y: 1.6, z: 0}
+  cameraOrientationOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1001 &8605053031581502414
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2663777352090040658}
+    m_Modifications:
+    - target: {fileID: 5240704533777318644, guid: 493b9b89e2369cc5aaec08f2c2de87bc,
+        type: 3}
+      propertyPath: m_Name
+      value: Robot Kyle Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240704533777358548, guid: 493b9b89e2369cc5aaec08f2c2de87bc,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240704533777358548, guid: 493b9b89e2369cc5aaec08f2c2de87bc,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240704533777358548, guid: 493b9b89e2369cc5aaec08f2c2de87bc,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.064818
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240704533777358548, guid: 493b9b89e2369cc5aaec08f2c2de87bc,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240704533777358548, guid: 493b9b89e2369cc5aaec08f2c2de87bc,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240704533777358548, guid: 493b9b89e2369cc5aaec08f2c2de87bc,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240704533777358548, guid: 493b9b89e2369cc5aaec08f2c2de87bc,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240704533777358548, guid: 493b9b89e2369cc5aaec08f2c2de87bc,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240704533777358548, guid: 493b9b89e2369cc5aaec08f2c2de87bc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240704533777358548, guid: 493b9b89e2369cc5aaec08f2c2de87bc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240704533777358548, guid: 493b9b89e2369cc5aaec08f2c2de87bc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 493b9b89e2369cc5aaec08f2c2de87bc, type: 3}
+--- !u!4 &4598724038121248026 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5240704533777358548, guid: 493b9b89e2369cc5aaec08f2c2de87bc,
+    type: 3}
+  m_PrefabInstance: {fileID: 8605053031581502414}
+  m_PrefabAsset: {fileID: 0}
