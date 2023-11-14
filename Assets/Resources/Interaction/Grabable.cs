@@ -37,6 +37,9 @@ namespace RVC {
                     photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
                     //photonView.RequestOwnership();
 
+                    // show interaction awerness to all the users
+                    photonView.RPC("Catch", RpcTarget.Others);
+                    PhotonNetwork.SendAllOutgoingCommands();
 
                 }
                 Catch () ;
@@ -64,7 +67,8 @@ namespace RVC {
         public virtual void LocalRelease () {
             print ("LocalRelease") ;
     		if (PhotonNetwork.IsConnected) {
-       		    // add code here
+                photonView.RPC("Release", RpcTarget.Others);
+                PhotonNetwork.SendAllOutgoingCommands();
             }
             Release () ;
         }
@@ -90,7 +94,8 @@ namespace RVC {
             if (! caught) {
                 ShowCatchable () ;
                 if (PhotonNetwork.IsConnected) {
-           	        // add code here
+                    photonView.RPC("ShowCatchable", RpcTarget.Others);
+                    PhotonNetwork.SendAllOutgoingCommands();
                 }
             } else {
                 numberOfTools = numberOfTools + 1 ;
@@ -111,7 +116,8 @@ namespace RVC {
             if (! caught) {
                 HideCatchable () ;
                 if (PhotonNetwork.IsConnected) {
-           		    // add code here
+                    photonView.RPC("HideCatchable", RpcTarget.Others);
+                    PhotonNetwork.SendAllOutgoingCommands();
                 }
             } else {
                 numberOfTools = numberOfTools - 1 ;
