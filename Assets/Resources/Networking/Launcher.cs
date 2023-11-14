@@ -66,8 +66,10 @@ namespace RVC {
         /// </summary>
         void Start () {
             // Connect(); // remplacé par un appel de connect suite à un click sur le bouton de connexion
-            progressLabel.SetActive (false) ;
-            controlPanel.SetActive (true) ;
+            progressLabel.SetActive(false);
+            controlPanel.SetActive(true);
+
+
         }
 
         #endregion
@@ -138,6 +140,49 @@ namespace RVC {
             }
         }
 
+        #endregion
+
+        #region userDefinnedMethods 
+        public void ConnectRedUser()
+        {
+
+            PlayerPrefs.SetFloat("Red", 1.0f);
+
+            PlayerPrefs.SetFloat("Green", 0.0f);
+
+            PlayerPrefs.SetFloat("Blue", 0.0f);
+
+            Connect();
+
+        }
+
+
+        public void ConnectGreenUser()
+        {
+
+            PlayerPrefs.SetFloat("Red", 0.0f);
+
+            PlayerPrefs.SetFloat("Green", 1.0f);
+
+            PlayerPrefs.SetFloat("Blue", 0.0f);
+
+            Connect();
+
+        }
+
+
+        public void ConnectBlueUser()
+        {
+
+            PlayerPrefs.SetFloat("Red", 0.0f);
+
+            PlayerPrefs.SetFloat("Green", 0.0f);
+
+            PlayerPrefs.SetFloat("Blue", 1.0f);
+
+            Connect();
+
+        }
         #endregion
     }
 }
