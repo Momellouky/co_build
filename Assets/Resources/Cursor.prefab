@@ -252,7 +252,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_PhysicsTriggerInteraction: 1
-  objectToInstanciate: {fileID: 0}
+  objectToInstanciate: {fileID: 6941870124342275831, guid: 517ca78fe2a5cd441a2eccf2528c9b39, type: 3}
   create:
     m_Name: Create
     m_Type: 0
@@ -260,7 +260,15 @@ MonoBehaviour:
     m_Id: 8b5871e7-3d54-49fb-9189-8676a439b461
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: af75e161-1398-409b-9672-b3a12da6710f
+      m_Path: <Keyboard>/space
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Create
+      m_Flags: 0
     m_Flags: 0
 --- !u!114 &2230971601001588054
 MonoBehaviour:

@@ -17,7 +17,9 @@ namespace RVC {
             if (! photonTool.photonView.IsMine) {
                 enabled = false ;
             }
-		}
+            create.Enable();
+            create.started += ctx => CreateSharedObject();
+        }
 
         protected void OnTriggerEnter (Collider col) {
             base.OnTriggerEnter (col) ;
@@ -27,6 +29,13 @@ namespace RVC {
                 attachTransform.SetPositionAndRotation (interactable.transform.position, interactable.transform.rotation) ;
             }
         }
+
+        public void CreateSharedObject()
+        {
+
+            photonTool.CreateSharedObject(objectToInstanciate);
+
+        }   
 
     }
 
