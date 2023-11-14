@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
 namespace RVC {
 
-    public class Grabable : MonoBehaviourPun {
+    public class Grabable : MonoBehaviourPun, IPunOwnershipCallbacks
+    {
 
         private Color catchableColor = Color.cyan ;
         private Color caughtColor = Color.yellow ;
@@ -32,12 +34,16 @@ namespace RVC {
             if (! caught) {
     			if (PhotonNetwork.IsConnected) {
                     print ("LocalCatch : photonView.isRuntimeInstantiated") ;
-	    			photonView.RequestOwnership () ;
-       		        // add code here
+                    photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
+                    //photonView.RequestOwnership();
+
+
                 }
                 Catch () ;
             }
         }
+
+
 
         [PunRPC]
         public virtual void Catch () {
@@ -121,6 +127,48 @@ namespace RVC {
             }
         }
 
+        public void OnOwnershipTransfered(PhotonView targetView, Player previousOwner)
+        {
+            Debug.Log("On Ownership Transfered");
+        }
+
+        public void OnOwnershipTransferFailed(PhotonView targetView, Player senderOfFailedRequest)
+        {
+            Debug.Log("OwnerShip transfer failed.");
+        }
+
+        public void OnOwnershipRequest(PhotonView targetView, Player requestingPlayer)
+        {
+            Debug.Log("OnOwnershipRequest callback");
+            targetView.TransferOwnership(requestingPlayer);
+            Debug.Log("Ownership transfered. ");
+        }
+
+
+        private void TransferOwnership(int targetPlayerId)
+        {
+            // Ensure the PhotonView is valid
+            if (photonView != null)
+            {
+                // Find the target player based on their player ID
+                Player targetPlayer = PhotonNetwork.CurrentRoom.GetPlayer(targetPlayerId);
+
+                // Check if the target player is valid
+                if (targetPlayer != null)
+                {
+                    // Transfer ownership to the target player
+                    photonView.TransferOwnership(targetPlayer);
+                }
+                else
+                {
+                    Debug.LogError("Target player not found!");
+                }
+            }
+            else
+            {
+                Debug.LogError("PhotonView is null!");
+            }
+        }
     }
 
 }
