@@ -39,7 +39,7 @@ namespace RVC {
                     // show interaction awerness to all the users
                     photonView.RPC("Catch", RpcTarget.Others);
                     PhotonNetwork.SendAllOutgoingCommands();
-
+                    ActiveHandles.pushID(this.photonView.ViewID); // to tell that it is active
                 }
                 Catch () ;
             }
@@ -68,6 +68,7 @@ namespace RVC {
     		if (PhotonNetwork.IsConnected) {
                 photonView.RPC("Release", RpcTarget.Others);
                 PhotonNetwork.SendAllOutgoingCommands();
+                ActiveHandles.popID(this.photonView.ViewID);
             }
             Release () ;
         }

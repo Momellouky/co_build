@@ -29,9 +29,14 @@ public class InteractiveCubeWithHandle : MonoBehaviourPun
 
         if (photonView.IsMine)
         {
-            Vector3 position = ComputePosition();
-            LOGING_POSITION(position);
-            transform.position = position;
+            Vector3 position = new Vector3();
+            if (ActiveHandles.activeHandlesNumber() >= 1) 
+            {
+                position = ComputePosition();
+                //LOGING_POSITION(position);
+                Debug.Log("Calling computePosition"); 
+                transform.position = position;
+            }
 
         }
 
