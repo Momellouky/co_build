@@ -33,10 +33,9 @@ namespace RVC {
             print ("LocalCatch") ;
             if (! caught) {
     			if (PhotonNetwork.IsConnected) {
-                    print ("LocalCatch : photonView.isRuntimeInstantiated") ;
+                    print ("LocalCatch : photonView.isRuntimeInstantiated");
                     photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
                     //photonView.RequestOwnership();
-
                     // show interaction awerness to all the users
                     photonView.RPC("Catch", RpcTarget.Others);
                     PhotonNetwork.SendAllOutgoingCommands();
