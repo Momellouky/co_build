@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 115d24b23fd94bb45924334a65ab515d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - mainCube: {fileID: 8842007851163844, guid: b8a29a293599a0444b84e956e33cbf4b, type: 3}
+  - topHandle: {instanceID: 0}
+  - bottomHandle: {instanceID: 0}
+  - leftHandle: {instanceID: 0}
+  - rightHandle: {instanceID: 0}
+  - frontHandle: {instanceID: 0}
+  - backHandle: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

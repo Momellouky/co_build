@@ -33,13 +33,26 @@ namespace RVC {
             print ("LocalCatch") ;
             if (! caught) {
     			if (PhotonNetwork.IsConnected) {
-                    print ("LocalCatch : photonView.isRuntimeInstantiated");
-                    photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
-                    //photonView.RequestOwnership();
-                    // show interaction awerness to all the users
-                    photonView.RPC("Catch", RpcTarget.Others);
-                    PhotonNetwork.SendAllOutgoingCommands();
-                    ActiveHandles.pushID(this.photonView.ViewID); // to tell that it is active
+                    if (ActiveHandles.notifyFirstActive() == true)
+                    {
+                        print("LocalCatch : Request ownership of the cube");
+                        OwnerShipRequester osr = new OwnerShipRequester(); 
+                        osr.requestCubeOwnerShip();
+                        osr.requestAllHandlesOwnerShip();
+                        PhotonNetwork.SendAllOutgoingCommands();
+                        ActiveHandles.pushID(this.photonView.ViewID); // to tell that it is active
+                        print("LocalCatch : Cube Ownership Requested");
+                    }
+                    else
+                    {
+                        print("LocalCatch : photonView.isRuntimeInstantiated");
+                        photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
+                        //photonView.RequestOwnership();
+                        // show interaction awerness to all the users
+                        photonView.RPC("Catch", RpcTarget.Others);
+                        PhotonNetwork.SendAllOutgoingCommands();
+                        ActiveHandles.pushID(this.photonView.ViewID); // to tell that it is active
+                    }
                 }
                 Catch () ;
             }

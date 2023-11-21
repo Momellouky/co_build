@@ -29,4 +29,8 @@ public class ActiveHandles
         return activeHandles;
     }
 
+    public static bool notifyFirstActive() {
+        return activeHandles == 0 ? true : false ;
+    }
+
 }
