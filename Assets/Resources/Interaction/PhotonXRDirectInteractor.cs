@@ -8,17 +8,31 @@ namespace RVC {
     public class PhotonXRDirectInteractor : XRDirectInteractor {
 
         PhotonTool photonTool ;
-        public GameObject objectToInstanciate ;
+        public GameObject objectToInstanciate_innerWall ;
+        public GameObject objectToInstanciate_outerWall ;
         public InputAction create ;
+        public InputAction keyPressSpace ;
+        public InputAction keyPressControl ;
+        private const KeyCode SPACE_KEYBOARD = KeyCode.Space;
+        private const KeyCode LEFTSHIFT_KEYBOARD = KeyCode.LeftShift;
 
-		new void Start () {
+        new void Start () {
 			photonTool = (PhotonTool)GameObject.FindObjectOfType (typeof(PhotonTool)) ;
             print ("PhotonXRDirectInteractor " + name + " Start : photonView.IsMine = " + photonTool.photonView.IsMine) ;
             if (! photonTool.photonView.IsMine) {
                 enabled = false ;
             }
-            create.Enable();
-            create.started += ctx => CreateSharedObject();
+            //create.Enable();
+            //create.started += ctx => CreateSharedObject();
+
+            keyPressSpace = new InputAction(binding: "<Keyboard>/" + SPACE_KEYBOARD); // Set up the keyboard input action
+            keyPressSpace.Enable();
+            keyPressSpace.started += ctx => CreateSharedObject(objectToInstanciate_innerWall);
+
+            keyPressControl = new InputAction(binding: "<Keyboard>/" + LEFTSHIFT_KEYBOARD); // Set up the keyboard input action
+            keyPressControl.Enable();
+            keyPressControl.started += ctx => CreateSharedObject(objectToInstanciate_outerWall);
+
         }
 
         protected void OnTriggerEnter (Collider col) {
@@ -30,10 +44,10 @@ namespace RVC {
             }
         }
 
-        public void CreateSharedObject()
+        public void CreateSharedObject(GameObject gameobjectToInstantiate)
         {
 
-            photonTool.CreateSharedObject(objectToInstanciate);
+            photonTool.CreateSharedObject(gameobjectToInstantiate);
 
         }   
 

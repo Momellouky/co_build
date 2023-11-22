@@ -38,20 +38,20 @@ public class OwnerShipRequester : MonoBehaviourPun
         public static PhotonView mainCube;
         public static PhotonView backHandle;
         public static PhotonView frontHandle;
-        public static PhotonView topHandle;
-        public static PhotonView bottomHandle;
-        public static PhotonView rightHandle;
-        public static PhotonView leftHandle;
+        //public static PhotonView topHandle;
+        //public static PhotonView bottomHandle;
+        //public static PhotonView rightHandle;
+        //public static PhotonView leftHandle;
         #endregion
 
         public static void initViews() {
             mainCube = gameobjects.mainCube.GetPhotonView();
             backHandle = gameobjects.backHandle.GetPhotonView();
             frontHandle = gameobjects.frontHandle.GetPhotonView();
-            topHandle = gameobjects.topHandle.GetPhotonView();
-            bottomHandle = gameobjects.bottomHandle.GetPhotonView();
-            rightHandle = gameobjects.rightHandle.GetPhotonView();
-            leftHandle = gameobjects.leftHandle.GetPhotonView(); 
+            //topHandle = gameobjects.topHandle.GetPhotonView();
+            //bottomHandle = gameobjects.bottomHandle.GetPhotonView();
+            //rightHandle = gameobjects.rightHandle.GetPhotonView();
+            //leftHandle = gameobjects.leftHandle.GetPhotonView(); 
         }
     }
 
@@ -60,12 +60,15 @@ public class OwnerShipRequester : MonoBehaviourPun
         Debug.Log("Start Initialisation");
 
         gameobjects.mainCube = GameObject.FindGameObjectWithTag(tags.mainCube);
-        gameobjects.topHandle = GameObject.FindGameObjectWithTag(tags.topHandle);
-        gameobjects.bottomHandle = GameObject.FindGameObjectWithTag(tags.bottomHandle);
+        Debug.Log("We have already Get the main cube view"); 
         gameobjects.backHandle = GameObject.FindGameObjectWithTag(tags.backHandle);
+        Debug.Log("We have already Get the backHandle view"); 
         gameobjects.frontHandle = GameObject.FindGameObjectWithTag(tags.frontHandle);
-        gameobjects.rightHandle = GameObject.FindGameObjectWithTag(tags.rightHandle);
-        gameobjects.leftHandle = GameObject.FindGameObjectWithTag(tags.leftHandle);
+        Debug.Log("We have already Get the frontHandle view"); 
+        //gameobjects.topHandle = GameObject.FindGameObjectWithTag(tags.topHandle);
+        //gameobjects.bottomHandle = GameObject.FindGameObjectWithTag(tags.bottomHandle);
+        //gameobjects.rightHandle = GameObject.FindGameObjectWithTag(tags.rightHandle);
+        //gameobjects.leftHandle = GameObject.FindGameObjectWithTag(tags.leftHandle);
 
         Debug.Log("initialize views");
 
@@ -96,19 +99,19 @@ public class OwnerShipRequester : MonoBehaviourPun
 
         if (PhotonNetwork.IsConnected)
         {
-            photonViews.topHandle.TransferOwnership(PhotonNetwork.LocalPlayer);
-            photonViews.bottomHandle.TransferOwnership(PhotonNetwork.LocalPlayer);
-            photonViews.rightHandle.TransferOwnership(PhotonNetwork.LocalPlayer);
-            photonViews.leftHandle.TransferOwnership(PhotonNetwork.LocalPlayer);
             photonViews.frontHandle.TransferOwnership(PhotonNetwork.LocalPlayer);
             photonViews.backHandle.TransferOwnership(PhotonNetwork.LocalPlayer);
+            //photonViews.topHandle.TransferOwnership(PhotonNetwork.LocalPlayer);
+            //photonViews.bottomHandle.TransferOwnership(PhotonNetwork.LocalPlayer);
+            //photonViews.rightHandle.TransferOwnership(PhotonNetwork.LocalPlayer);
+            //photonViews.leftHandle.TransferOwnership(PhotonNetwork.LocalPlayer);
 
-            photonViews.topHandle.RPC("Catch", RpcTarget.Others);
-            photonViews.bottomHandle.RPC("Catch", RpcTarget.Others);
-            photonViews.rightHandle.RPC("Catch", RpcTarget.Others);
-            photonViews.leftHandle.RPC("Catch", RpcTarget.Others);
             photonViews.frontHandle.RPC("Catch", RpcTarget.Others);
             photonViews.backHandle.RPC("Catch", RpcTarget.Others);
+            //photonViews.topHandle.RPC("Catch", RpcTarget.Others);
+            //photonViews.bottomHandle.RPC("Catch", RpcTarget.Others);
+            //photonViews.rightHandle.RPC("Catch", RpcTarget.Others);
+            //photonViews.leftHandle.RPC("Catch", RpcTarget.Others);
             PhotonNetwork.SendAllOutgoingCommands();
         }
     }
