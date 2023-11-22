@@ -31,6 +31,7 @@ namespace RVC {
 
         public virtual void LocalCatch () {
             print ("LocalCatch") ;
+            
             if (! caught) {
     			if (PhotonNetwork.IsConnected) {
                     if (ActiveHandles.notifyFirstActive() == true)
@@ -42,6 +43,9 @@ namespace RVC {
                         PhotonNetwork.SendAllOutgoingCommands();
                         ActiveHandles.pushID(this.photonView.ViewID); // to tell that it is active
                         print("LocalCatch : Cube Ownership Requested");
+                        ComputePositionDecision.plusUser();
+                        ComputePositionDecision.plusUser();
+                        Debug.Log($"Number of users on catch {ComputePositionDecision.getNbrUser()}");
                     }
                     else
                     {
@@ -52,6 +56,9 @@ namespace RVC {
                         photonView.RPC("Catch", RpcTarget.Others);
                         PhotonNetwork.SendAllOutgoingCommands();
                         ActiveHandles.pushID(this.photonView.ViewID); // to tell that it is active
+                        ComputePositionDecision.plusUser();
+                        ComputePositionDecision.plusUser();
+                        Debug.Log($"Number of users on catch {ComputePositionDecision.getNbrUser()}"); 
                     }
                 }
                 Catch () ;
@@ -82,6 +89,9 @@ namespace RVC {
                 photonView.RPC("Release", RpcTarget.Others);
                 PhotonNetwork.SendAllOutgoingCommands();
                 ActiveHandles.popID(this.photonView.ViewID);
+                ComputePositionDecision.minusUser();
+                Debug.Log($"Number of users On release {ComputePositionDecision.getNbrUser()}");
+
             }
             Release () ;
         }

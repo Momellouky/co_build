@@ -12,7 +12,11 @@ using Photon.Realtime;
 
 namespace RVC {
     public class GameManager : MonoBehaviourPunCallbacks {
-
+        #region Private Fields
+        private int defaultX = 0; 
+        private int defaultY = 0; 
+        private int defaultZ = 0; 
+        #endregion
         #region Public Fields
 
         public static GameManager Instance ;
@@ -45,13 +49,24 @@ namespace RVC {
                 // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                 Debug.LogFormat ("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName) ;
                 // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-                rigGO = PhotonNetwork.Instantiate (this.playerPrefab.name, new Vector3 (0f, 0.5f, 0f), Quaternion.identity, 0) ;
+                defaultX = PlayerPrefs.GetInt("x");
+                defaultZ = PlayerPrefs.GetInt("z");
+
+                deletePositionKeys(); 
+
+                Debug.Log($"The value x to set the player on is {defaultX}"); 
+                Debug.Log($"The value y to set the player on is {defaultY}"); 
+                Debug.Log($"The value z to set the player on is {defaultZ}"); 
+                rigGO = PhotonNetwork.Instantiate (this.playerPrefab.name, new Vector3 (defaultX, defaultY, defaultZ), Quaternion.identity, 0) ;
                 Debug.LogFormat ("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName) ;
             }
         }
 
         #region Private Methods
-
+        private void deletePositionKeys() {
+            PlayerPrefs.DeleteKey("x");
+            PlayerPrefs.DeleteKey("z");
+        }
         #endregion
 
         #region Photon Callbacks
