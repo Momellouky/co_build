@@ -11,6 +11,11 @@ TagManager:
   - bottomHandle
   - leftHandle
   - rightHandle
+  - textNotification
+  - usersList
+  - grayBG
+  - usersListText
+  - BG
   layers:
   - Default
   - TransparentFX

@@ -35,7 +35,7 @@ namespace RVC {
         GameObject rigGO ;
         public TextMeshProUGUI notificationText;
         public TextMeshProUGUI usersListText;
-        public Image grayBG; 
+        public GameObject userListBackground; 
 
         #endregion
 
@@ -66,7 +66,7 @@ namespace RVC {
 
                 rigGO = PhotonNetwork.Instantiate (this.playerPrefab.name, new Vector3 (defaultX, defaultY, defaultZ), Quaternion.identity, 0) ;
                 Debug.LogFormat ("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName) ;
-                showList(); // of users
+                ShowHideListUsers(); 
             }
         }
 
@@ -76,10 +76,22 @@ namespace RVC {
             PlayerPrefs.DeleteKey("z");
         }
 
-        private void showList() {
+        private void enableListBackground()
+        {
+            Debug.Log("On EnableListBackground Function ");
+            userListBackground.SetActive (true);
+        }
+
+        private void disableListBackground()
+        {
+            Debug.Log("On Disable Function ");
+            userListBackground.SetActive(false);
+        }
+        private void ShowHideListUsers() {
             Dictionary<int, string> listUsers = UserList.getList();
             InputAction keyPressSpace;
             const KeyCode KEY_L = KeyCode.L;
+            const KeyCode KEY_H = KeyCode.H;
 
             Debug.Log("In showListFunction");
             Debug.Log($"Size of the user list {listUsers.Count}");
@@ -87,6 +99,11 @@ namespace RVC {
             keyPressSpace = new InputAction(binding: "<Keyboard>/" + KEY_L); // Set up the keyboard input action
             keyPressSpace.Enable();
             keyPressSpace.started += ctx => CreateList(listUsers);
+
+            keyPressSpace = new InputAction(binding: "<Keyboard>/" + KEY_H); // Set up the keyboard input action
+            keyPressSpace.Enable();
+            keyPressSpace.started += ctx => disableListBackground();
+        
         }
 
         private void CreateList(Dictionary<int, string> listUsers)
@@ -94,6 +111,7 @@ namespace RVC {
             Debug.Log("In CreateList function");
             Debug.Log($"Size of the user list {listUsers.Count}");
 
+            enableListBackground(); 
             usersListText.text = string.Empty; 
 
             foreach (var el in listUsers)

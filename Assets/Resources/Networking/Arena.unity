@@ -2770,11 +2770,11 @@ GameObject:
   - component: {fileID: 1500752078}
   m_Layer: 0
   m_Name: usersList
-  m_TagString: Untagged
+  m_TagString: BG
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1500752078
 Transform:
   m_ObjectHideFlags: 0
@@ -4352,6 +4352,14 @@ PrefabInstance:
       propertyPath: interactiveObject
       value: 
       objectReference: {fileID: 890, guid: 1efe0fa86477636b480cee76f33a06d4, type: 3}
+    - target: {fileID: 3736022095211866993, guid: 0b2a0139a108c8288afd5654b34e5cf7, type: 3}
+      propertyPath: userListTextTitle
+      value: 
+      objectReference: {fileID: 780923516}
+    - target: {fileID: 3736022095211866993, guid: 0b2a0139a108c8288afd5654b34e5cf7, type: 3}
+      propertyPath: userListBackground
+      value: 
+      objectReference: {fileID: 1500752077}
     - target: {fileID: 3736022095211866994, guid: 0b2a0139a108c8288afd5654b34e5cf7, type: 3}
       propertyPath: m_RootOrder
       value: 7
