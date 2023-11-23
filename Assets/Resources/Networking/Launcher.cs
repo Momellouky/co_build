@@ -3,6 +3,7 @@ using UnityEngine.UIElements;
 
 using Photon.Pun;
 using Photon.Realtime;
+using Photon.Pun.UtilityScripts;
 
 namespace RVC {
 
@@ -33,6 +34,7 @@ namespace RVC {
         /// This client's version number. Users are separated from each other by gameVersion (which allows you to make breaking changes).
         /// </summary>
         string gameVersion = "1";
+        //private NotificationManager joinNotifier = NotificationManager.Instance;
 
         #endregion
 
@@ -109,10 +111,12 @@ namespace RVC {
             // this case where isConnecting is false is typically when you lost or quit the game, when this level is loaded, OnConnectedToMaster will be called, in that case
             // we don't want to do anything.
             if (isConnecting) {
-                Debug.Log ("isConnecting is true : PhotonNetwork.JoinRandomRoom()") ;
                 // #Critical: The first we try to do is to join a potential existing room. If there is, good, else, we'll be called back with OnJoinRandomFailed()
-                PhotonNetwork.JoinRandomRoom () ;
+                bool joinRoom = PhotonNetwork.JoinRandomRoom () ;
+                Debug.Log($"joinRoom is {joinRoom}");
+                
                 //isConnecting = false ;
+                Debug.Log ("isConnecting is true : PhotonNetwork.JoinRandomRoom()") ;
             }
         }
 
@@ -132,6 +136,13 @@ namespace RVC {
         public override void OnJoinedRoom () {
             Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
             // #Critical: We only load if we are the first player, else we rely on `PhotonNetwork.AutomaticallySyncScene` to sync our instance scene.
+
+            int playernNumber = PhotonNetwork.LocalPlayer.ActorNumber;
+            string playerName = PhotonNetwork.LocalPlayer.NickName;
+            Debug.Log($"The player number is : {playernNumber}");
+            Debug.Log($"The player's name is : {playerName}");
+            //joinNotifier.userJoin(playernNumber, playerName);
+
             if (PhotonNetwork.CurrentRoom.PlayerCount == 1) {
                 Debug.Log ("We load the arena") ;
                 // #Critical

@@ -8,15 +8,18 @@ using UnityEngine.SceneManagement;
 
 using Photon.Pun;
 using Photon.Realtime;
-
+using UnityEngine.UI;
+using TMPro;
 
 namespace RVC {
     public class GameManager : MonoBehaviourPunCallbacks {
+
         #region Private Fields
         private int defaultX = 0; 
         private int defaultY = 0; 
-        private int defaultZ = 0; 
+        private int defaultZ = 0;
         #endregion
+
         #region Public Fields
 
         public static GameManager Instance ;
@@ -26,6 +29,8 @@ namespace RVC {
         public Navigation desktopPrefab ;
         Navigation playerPrefab ;
         GameObject rigGO ;
+        public TextMeshProUGUI notificationText;
+        private WaitForSeconds messageDuration = new WaitForSeconds(5f);
 
         #endregion
 
@@ -54,9 +59,6 @@ namespace RVC {
 
                 deletePositionKeys(); 
 
-                Debug.Log($"The value x to set the player on is {defaultX}"); 
-                Debug.Log($"The value y to set the player on is {defaultY}"); 
-                Debug.Log($"The value z to set the player on is {defaultZ}"); 
                 rigGO = PhotonNetwork.Instantiate (this.playerPrefab.name, new Vector3 (defaultX, defaultY, defaultZ), Quaternion.identity, 0) ;
                 Debug.LogFormat ("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName) ;
             }
@@ -66,6 +68,24 @@ namespace RVC {
         private void deletePositionKeys() {
             PlayerPrefs.DeleteKey("x");
             PlayerPrefs.DeleteKey("z");
+        }
+
+        [PunRPC]
+        private void SendJoinNotification(string playerName)
+        {
+            if(playerName.Equals(PhotonNetwork.NickName))
+            {
+                playerName = string.Empty; 
+            }
+            notificationText.text = $"{playerName} has joined !";
+            Debug.LogWarning("Inside SendJoinNotification");
+            StartCoroutine(ClearMessageAfterDelay());
+        }
+
+        private IEnumerator ClearMessageAfterDelay()
+        {
+            yield return messageDuration; // Wait for the specified duration
+            notificationText.text = ""; // Clear the message after the duration
         }
         #endregion
 
@@ -79,6 +99,14 @@ namespace RVC {
         }
 
         public override void OnPlayerEnteredRoom (Player other) {
+
+            //joinNotifier.userJoin(other.ActorNumber, other.NickName);
+
+            if (!other.IsLocal)
+            {
+                photonView.RPC("SendJoinNotification", RpcTarget.All, other.NickName);
+            }
+
             Debug.LogFormat ("OnPlayerEnteredRoom() {0}", other.NickName) ; // not seen if you're the player connecting
             // we load the Arena only once, for the first user who connects, it is made by the launcher
             if (PhotonNetwork.IsMasterClient) {
@@ -101,6 +129,7 @@ namespace RVC {
         #endregion
 
 		[PunRPC] void SomebodyJoined (PhotonMessageInfo info) {
+            Debug.Log("SomeBodyJoined"); 
             Navigation rig = (Navigation)rigGO.GetComponent (typeof (Navigation)) ;
             rig.CatchCamera () ;
 		}
