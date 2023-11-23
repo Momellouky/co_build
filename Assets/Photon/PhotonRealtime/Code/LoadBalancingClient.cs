@@ -4080,6 +4080,7 @@ namespace Photon.Realtime
 
         public void OnConnectedToMaster()
         {
+
             this.client.UpdateCallbackTargets();
 
             foreach (IConnectionCallbacks target in this)

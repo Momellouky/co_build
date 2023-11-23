@@ -19,6 +19,9 @@ namespace RVC {
 
         // Store the PlayerPref Key to avoid typos
         const string playerNamePrefKey = "PlayerName";
+        const string xPos = "0";
+        const string yPos = "0";
+        const string zPos = "0";
 
 
         #endregion
@@ -61,6 +64,27 @@ namespace RVC {
             }
             PhotonNetwork.NickName = value ;
             PlayerPrefs.SetString (playerNamePrefKey, value) ;
+        }
+
+        public void setXPos(string xPos)
+        {
+            if(string.IsNullOrEmpty(xPos))
+            {
+                xPos = "0" ;
+            }
+            int x = int.Parse(xPos);
+            Debug.Log($"Setting x position {x}");
+            PlayerPrefs.SetInt ("x", x);
+        }
+
+        public void setZPos(string zPos) {
+            if (string.IsNullOrEmpty(zPos))
+            {
+                zPos = "0";
+            }
+            int z = int.Parse(zPos);
+            Debug.Log($"Setting z position {z}");
+            PlayerPrefs.SetInt ("z", z);
         }
 
         #endregion

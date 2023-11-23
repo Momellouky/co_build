@@ -253,7 +253,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_PhysicsTriggerInteraction: 1
-  objectToInstanciate: {fileID: 6941870124342275831, guid: 517ca78fe2a5cd441a2eccf2528c9b39, type: 3}
+  objectToInstanciate_innerWall: {fileID: 8674826785388778302, guid: 39443ed451e770c4aa2a931d3d5acb83, type: 3}
+  objectToInstanciate_outerWall: {fileID: 1011083166892796238, guid: 2e36c8dce1d49fa4d80af4dc624db2f5, type: 3}
   create:
     m_Name: Create
     m_Type: 0
@@ -270,6 +271,24 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Create
       m_Flags: 0
+    m_Flags: 0
+  keyPressSpace:
+    m_Name: Key Press Space
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 88701495-2837-49a5-9b82-02e381bf5946
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  keyPressControl:
+    m_Name: Key Press Control
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 50a6fac2-c6d7-40a5-bb9e-14a389f86fbb
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
     m_Flags: 0
 --- !u!114 &2230971601001588054
 MonoBehaviour:
