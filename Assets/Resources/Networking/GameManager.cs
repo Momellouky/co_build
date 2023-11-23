@@ -10,6 +10,8 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 namespace RVC {
     public class GameManager : MonoBehaviourPunCallbacks {
@@ -18,6 +20,8 @@ namespace RVC {
         private int defaultX = 0; 
         private int defaultY = 0; 
         private int defaultZ = 0;
+        //private UserList userlist = UserList.Instance; 
+        private WaitForSeconds messageDuration = new WaitForSeconds(5f);
         #endregion
 
         #region Public Fields
@@ -30,7 +34,8 @@ namespace RVC {
         Navigation playerPrefab ;
         GameObject rigGO ;
         public TextMeshProUGUI notificationText;
-        private WaitForSeconds messageDuration = new WaitForSeconds(5f);
+        public TextMeshProUGUI usersListText;
+        public Image grayBG; 
 
         #endregion
 
@@ -61,6 +66,7 @@ namespace RVC {
 
                 rigGO = PhotonNetwork.Instantiate (this.playerPrefab.name, new Vector3 (defaultX, defaultY, defaultZ), Quaternion.identity, 0) ;
                 Debug.LogFormat ("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName) ;
+                showList(); // of users
             }
         }
 
@@ -68,6 +74,35 @@ namespace RVC {
         private void deletePositionKeys() {
             PlayerPrefs.DeleteKey("x");
             PlayerPrefs.DeleteKey("z");
+        }
+
+        private void showList() {
+            Dictionary<int, string> listUsers = UserList.getList();
+            InputAction keyPressSpace;
+            const KeyCode KEY_L = KeyCode.L;
+
+            Debug.Log("In showListFunction");
+            Debug.Log($"Size of the user list {listUsers.Count}");
+
+            keyPressSpace = new InputAction(binding: "<Keyboard>/" + KEY_L); // Set up the keyboard input action
+            keyPressSpace.Enable();
+            keyPressSpace.started += ctx => CreateList(listUsers);
+        }
+
+        private void CreateList(Dictionary<int, string> listUsers)
+        {
+            Debug.Log("In CreateList function");
+            Debug.Log($"Size of the user list {listUsers.Count}");
+
+            usersListText.text = string.Empty; 
+
+            foreach (var el in listUsers)
+            {
+                string userName = el.Value;
+                usersListText.text += userName + "\n";
+            }
+            
+
         }
 
         [PunRPC]
@@ -80,6 +115,15 @@ namespace RVC {
             notificationText.text = $"{playerName} has joined !";
             Debug.LogWarning("Inside SendJoinNotification");
             StartCoroutine(ClearMessageAfterDelay());
+        }
+
+        [PunRPC]
+        private void SendLeaveMessage(string playerName)
+        {
+            // Update the messageText for all players using an RPC
+            notificationText.text = $"{playerName} has left !";
+            StartCoroutine(ClearMessageAfterDelay());
+
         }
 
         private IEnumerator ClearMessageAfterDelay()
@@ -100,8 +144,7 @@ namespace RVC {
 
         public override void OnPlayerEnteredRoom (Player other) {
 
-            //joinNotifier.userJoin(other.ActorNumber, other.NickName);
-
+            UserList.pushUser(other.ActorNumber, other.NickName);
             if (!other.IsLocal)
             {
                 photonView.RPC("SendJoinNotification", RpcTarget.All, other.NickName);
@@ -116,6 +159,11 @@ namespace RVC {
 
         public override void OnPlayerLeftRoom (Player other) {
             Debug.LogFormat ("OnPlayerLeftRoom() {0}", other.NickName) ; // seen when other disconnects
+            UserList.popUser(other.ActorNumber); 
+            if (!other.IsLocal)
+            {
+                photonView.RPC("SendLeaveMessage", RpcTarget.All, other.NickName);
+            }
         }
 
         #endregion
@@ -123,6 +171,8 @@ namespace RVC {
         #region Public Methods
 
         public void LeaveRoom () {
+            Debug.Log($"Master {PhotonNetwork.LocalPlayer.ActorNumber} left room"); 
+            UserList.popUser(PhotonNetwork.LocalPlayer.ActorNumber);
             PhotonNetwork.LeaveRoom () ;
         }
 

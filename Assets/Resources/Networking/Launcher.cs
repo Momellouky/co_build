@@ -34,7 +34,7 @@ namespace RVC {
         /// This client's version number. Users are separated from each other by gameVersion (which allows you to make breaking changes).
         /// </summary>
         string gameVersion = "1";
-        //private NotificationManager joinNotifier = NotificationManager.Instance;
+        //private UserList userList = UserList.Instance;
 
         #endregion
 
@@ -112,8 +112,7 @@ namespace RVC {
             // we don't want to do anything.
             if (isConnecting) {
                 // #Critical: The first we try to do is to join a potential existing room. If there is, good, else, we'll be called back with OnJoinRandomFailed()
-                bool joinRoom = PhotonNetwork.JoinRandomRoom () ;
-                Debug.Log($"joinRoom is {joinRoom}");
+                PhotonNetwork.JoinRandomRoom () ;
                 
                 //isConnecting = false ;
                 Debug.Log ("isConnecting is true : PhotonNetwork.JoinRandomRoom()") ;
@@ -136,13 +135,7 @@ namespace RVC {
         public override void OnJoinedRoom () {
             Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
             // #Critical: We only load if we are the first player, else we rely on `PhotonNetwork.AutomaticallySyncScene` to sync our instance scene.
-
-            int playernNumber = PhotonNetwork.LocalPlayer.ActorNumber;
-            string playerName = PhotonNetwork.LocalPlayer.NickName;
-            Debug.Log($"The player number is : {playernNumber}");
-            Debug.Log($"The player's name is : {playerName}");
-            //joinNotifier.userJoin(playernNumber, playerName);
-
+            UserList.pushUser(PhotonNetwork.LocalPlayer.ActorNumber, PhotonNetwork.LocalPlayer.NickName) ;
             if (PhotonNetwork.CurrentRoom.PlayerCount == 1) {
                 Debug.Log ("We load the arena") ;
                 // #Critical
