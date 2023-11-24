@@ -92,6 +92,10 @@ public class InteractiveCubeWithHandle : MonoBehaviourPun
             }
 
         }
+        else 
+        {
+            Debug.LogWarning($"PhotonView.isMine is false");
+        }
 
     }
 

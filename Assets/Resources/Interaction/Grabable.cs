@@ -31,18 +31,21 @@ namespace RVC {
 
         public virtual void LocalCatch () {
             print ("LocalCatch") ;
-            
-            if (! caught) {
-    			if (PhotonNetwork.IsConnected) {
+
+            if (!caught)
+            {
+                if (PhotonNetwork.IsConnected)
+                {
                     if (ActiveHandles.notifyFirstActive() == true)
                     {
                         print("LocalCatch : Request ownership of the cube");
-                        OwnerShipRequester osr = new OwnerShipRequester(); 
+                        OwnerShipRequester osr = new OwnerShipRequester();
                         osr.requestCubeOwnerShip();
                         osr.requestAllHandlesOwnerShip();
                         PhotonNetwork.SendAllOutgoingCommands();
                         ActiveHandles.pushID(this.photonView.ViewID); // to tell that it is active
                         print("LocalCatch : Cube Ownership Requested");
+                        ComputePositionDecision.plusUser();
                         ComputePositionDecision.plusUser();
                         Debug.Log($"Number of users on catch {ComputePositionDecision.getNbrUser()}");
                     }
@@ -56,10 +59,13 @@ namespace RVC {
                         PhotonNetwork.SendAllOutgoingCommands();
                         ActiveHandles.pushID(this.photonView.ViewID); // to tell that it is active
                         ComputePositionDecision.plusUser();
-                        Debug.Log($"Number of users on catch {ComputePositionDecision.getNbrUser()}"); 
+                        Debug.Log($"Number of users on catch {ComputePositionDecision.getNbrUser()}");
                     }
                 }
-                Catch () ;
+                Catch();
+            }
+            else {
+                Debug.LogError($"The value of caught : {caught}");
             }
         }
 
@@ -88,6 +94,7 @@ namespace RVC {
                 PhotonNetwork.SendAllOutgoingCommands();
                 ActiveHandles.popID(this.photonView.ViewID);
                 ComputePositionDecision.minusUser();
+                ComputePositionDecision.minusUser();
                 Debug.Log($"Number of users On release {ComputePositionDecision.getNbrUser()}");
 
             }
@@ -99,6 +106,10 @@ namespace RVC {
             print ("Release") ;
             rb.isKinematic = false ;
             caught = false ;
+            ActiveHandles.popID(this.photonView.ViewID);
+            ComputePositionDecision.minusUser();
+            ComputePositionDecision.minusUser();
+            Debug.Log($"Number of users On release {ComputePositionDecision.getNbrUser()}");
             ShowReleased () ;
         }
 

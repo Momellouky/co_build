@@ -2266,7 +2266,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1240146511
 Transform:
   m_ObjectHideFlags: 0
@@ -4070,6 +4070,10 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 1631047173904437996, guid: 39443ed451e770c4aa2a931d3d5acb83, type: 3}
+      propertyPath: OwnershipTransfer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6706749864813956294, guid: 39443ed451e770c4aa2a931d3d5acb83, type: 3}
       propertyPath: sceneViewId
       value: 13
@@ -4077,6 +4081,10 @@ PrefabInstance:
     - target: {fileID: 7229423751968171643, guid: 39443ed451e770c4aa2a931d3d5acb83, type: 3}
       propertyPath: sceneViewId
       value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 7229423751968171643, guid: 39443ed451e770c4aa2a931d3d5acb83, type: 3}
+      propertyPath: OwnershipTransfer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8674826785388778302, guid: 39443ed451e770c4aa2a931d3d5acb83, type: 3}
       propertyPath: m_Name
